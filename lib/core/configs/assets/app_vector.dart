@@ -2,7 +2,11 @@ class AppVector {
   static const String basePath = 'assets/vectors/';
 
   static const String logo = '${basePath}wemu.svg';
-  static const String home = '${basePath}home.svg';
+  static const String trip = '${basePath}trip.svg';
+  static const String message = '${basePath}message.svg';
+  static const String setting = '${basePath}setting.svg';
+  static const String add = '${basePath}add.svg';
+
   static const String task = '${basePath}task.svg';
   static const String timesheet = '${basePath}timesheet.svg';
   static const String arrowAlt = '${basePath}arrowAlt.svg';

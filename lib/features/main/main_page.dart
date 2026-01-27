@@ -2,13 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wemu_team_app/core/configs/assets/app_vector.dart';
 import 'package:wemu_team_app/core/configs/theme/app_colors.dart';
-import 'package:wemu_team_app/features/home/home_page.dart';
-import 'package:wemu_team_app/features/timesheet/pages/timesheet_page.dart';
-import 'package:wemu_team_app/features/timesheet/widgets/timesheet_action_sheet.dart';
-import 'package:wemu_team_app/features/tasks/widgets/add_task_sheet.dart';
-import 'package:wemu_team_app/features/tasks/pages/tasks_page.dart';
-import 'package:wemu_team_app/core/di/injection.dart';
-import 'package:wemu_team_app/features/tasks/presentation/bloc/tasks_cubit.dart';
+import 'package:wemu_team_app/features/Trips/trips_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -18,46 +12,38 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int _currentIndex = 0;
+  int _currentIndex = 1;
 
-  void _openAddTaskModal() async {
-    final created = await AddTaskSheet.show(context: context);
-    if (created == true) {
-      // Refresh tasks page data after creating a task
-      if (!mounted) return;
-      final tasksCubit = getIt<TasksCubit>();
-      await tasksCubit.loadTasks();
-    }
-  }
-
-  final List<Widget> _pages = [
-    const HomePage(),
-    const TasksPage(),
-    const TimesheetPage(),
+  final List<Widget> _pages = const [
+    _NavPlaceholder(title: 'Messages'),
+    TripsPage(),
+    _NavPlaceholder(title: 'Settings'),
   ];
 
-  Widget _navIcon(String asset, bool isActive) {
-    final bool isTaskOrTimesheet = asset == AppVector.task || asset == AppVector.timesheet;
+  Widget _navIcon({String? svgAsset, IconData? iconData, required bool isActive}) {
+  final Color color = isActive ? AppColors.navActive : AppColors.gray;
+  const double iconSize = 30; 
 
-    final String iconAsset = (isActive && isTaskOrTimesheet) ? AppVector.addGreen : asset;
-    final bool showUnderline = isActive && !isTaskOrTimesheet;
-
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        SvgPicture.asset(iconAsset),
-        AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          height: 5,
-          width: showUnderline ? 35 : 0,
-          decoration: BoxDecoration(
-            color: AppColors.green,
-            borderRadius: BorderRadius.circular(99),
-          ),
-        ),
-      ],
+  final Widget iconWidget;
+  if (svgAsset != null) {
+    iconWidget = SvgPicture.asset(
+      svgAsset,
+      width: iconSize,
+      height: iconSize,
+      colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
     );
+  } else if (iconData != null) {
+    iconWidget = Icon(
+      iconData,
+      color: color,
+      size: iconSize,
+    );
+  } else {
+    iconWidget = const SizedBox.shrink();
   }
+  return iconWidget;
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -69,27 +55,39 @@ class _MainPageState extends State<MainPage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
-          // When user is already on Task page and taps the green add icon, open Add Task modal
-          if (_currentIndex == 1 && index == 1) {
-            _openAddTaskModal();
-            return;
-          }
-          if (_currentIndex == 2 && index == 2) {
-            TimesheetActionSheet.show(context);
-            return;
-          }
           setState(() => _currentIndex = index);
         },
         showSelectedLabels: false,
         showUnselectedLabels: false,
         backgroundColor: AppColors.white,
-        type: BottomNavigationBarType.fixed, // Important for more than 3 items
+        type: BottomNavigationBarType.fixed,
         elevation: 0,
         items: [
-          BottomNavigationBarItem(icon: _navIcon(AppVector.home, _currentIndex == 0), label: ""),
-          BottomNavigationBarItem(icon: _navIcon(AppVector.task, _currentIndex == 1), label: ""),
-          BottomNavigationBarItem(icon: _navIcon(AppVector.timesheet, _currentIndex == 2), label: ""),
+          BottomNavigationBarItem(
+              icon: _navIcon(svgAsset: AppVector.message, isActive: _currentIndex == 0), label: ""),
+          BottomNavigationBarItem(
+              icon: _navIcon(svgAsset: AppVector.trip, isActive: _currentIndex == 1), label: ""),
+          BottomNavigationBarItem(
+              icon: _navIcon(svgAsset: AppVector.setting, isActive: _currentIndex == 2), label: ""),
         ],
+      ),
+    );
+  }
+}
+
+class _NavPlaceholder extends StatelessWidget {
+  final String title;
+  const _NavPlaceholder({required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        title,
+        style: const TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }

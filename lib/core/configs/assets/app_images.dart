@@ -13,4 +13,8 @@ class AppImages {
   static const String avata5 = '${basePath}avatar5.jpg';
   static const String avata6 = '${basePath}avatar6.jpg';
   static const String avata7 = '${basePath}avatar7.jpg';
+
+  static const String exam = '${basePath}exam.jpg';
+  static const String exam1 = '${basePath}exam1.jpg';
+
 }

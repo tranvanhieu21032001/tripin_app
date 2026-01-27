@@ -13,8 +13,10 @@ class AppColors {
   static const Color amber = Color(0x33FCA035);
   static const Color gray = Color(0xFFDADADA);
 
-  static const Color black = Color(0xFF000000);
+  static const Color black = Color(0xFF333333);
   static const Color white = Color(0xFFFFFFFF);
+  static const Color navActive = Color(0xFF333333);
+  static const Color navInactive = Color(0xFF8A8A8A);
 
   static const Color grey = Color(0x80000000);
 
