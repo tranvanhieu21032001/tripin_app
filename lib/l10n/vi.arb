@@ -1,0 +1,20 @@
+{
+  "@@locale": "vi",
+  "loginTitle": "Dang nhap",
+  "loginEmailLabel": "Dia chi email",
+  "loginEmailHint": "Nhap email cua ban",
+  "loginPasswordLabel": "Mat khau",
+  "loginPasswordHint": "Nhap mat khau cua ban",
+  "loginRememberMe": "Ghi nho dang nhap",
+  "loginForgotPassword": "Quen mat khau?",
+  "loginSignIn": "Dang nhap",
+  "loginSigningIn": "Dang dang nhap...",
+  "loginEmailRequired": "Can nhap email",
+  "loginEmailInvalid": "Email khong hop le",
+  "loginPasswordRequired": "Can nhap mat khau",
+  "loginErrorGeneric": "Dang nhap that bai. Vui long thu lai.",
+  "homeGreetingMorning": "Chao buoi sang,",
+  "homeGreetingAfternoon": "Chao buoi chieu,",
+  "homeGreetingEvening": "Chao buoi toi,",
+  "homeGreetingDefault": "Xin chao,"
+}

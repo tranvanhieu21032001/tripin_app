@@ -1,0 +1,70 @@
+name: wemu_team_app
+description: "A new Flutter project."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  flutter_svg: ^2.0.10
+  image_picker: ^1.0.7
+  intl: ^0.20.2
+  flutter_localizations:
+    sdk: flutter
+  flutter_bloc: ^8.1.6
+  table_calendar: ^3.0.9
+  equatable: ^2.0.5
+  dio: ^5.7.0
+  get_it: ^7.7.0
+  injectable: ^2.4.4
+  shared_preferences: ^2.2.3
+  crypto: ^3.0.3
+  socket_io_client: 1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  build_runner: ^2.4.12
+  injectable_generator: ^2.6.2
+
+flutter:
+  generate: true
+  uses-material-design: true
+
+  assets:
+    - assets/fonts/
+    - assets/images/
+    - assets/vectors/
+
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter_18pt-ExtraLight.ttf
+          weight: 200
+
+        - asset: assets/fonts/Inter_18pt-Light.ttf
+          weight: 300
+
+        - asset: assets/fonts/Inter_18pt-Regular.ttf
+          weight: 400
+
+        - asset: assets/fonts/Inter_18pt-Medium.ttf
+          weight: 500
+
+        - asset: assets/fonts/Inter_18pt-SemiBold.ttf
+          weight: 600
+
+        - asset: assets/fonts/Inter_18pt-Bold.ttf
+          weight: 700
+
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/to/font-from-package

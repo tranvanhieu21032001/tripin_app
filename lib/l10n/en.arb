@@ -1,0 +1,20 @@
+{
+  "@@locale": "en",
+  "loginTitle": "Login",
+  "loginEmailLabel": "Email Address",
+  "loginEmailHint": "Enter your email",
+  "loginPasswordLabel": "Password",
+  "loginPasswordHint": "Enter your password",
+  "loginRememberMe": "Remember Me",
+  "loginForgotPassword": "Forgot Password?",
+  "loginSignIn": "Sign In",
+  "loginSigningIn": "Signing In...",
+  "loginEmailRequired": "Email is required",
+  "loginEmailInvalid": "Invalid email",
+  "loginPasswordRequired": "Password is required",
+  "loginErrorGeneric": "Login failed. Please try again.",
+  "homeGreetingMorning": "Good Morning,",
+  "homeGreetingAfternoon": "Good Afternoon,",
+  "homeGreetingEvening": "Good Evening,",
+  "homeGreetingDefault": "Hello,"
+}
