@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wemu_team_app/core/configs/assets/app_images.dart';
 import 'package:wemu_team_app/core/configs/assets/app_vector.dart';
 import 'package:wemu_team_app/core/configs/theme/app_colors.dart';
+import 'package:wemu_team_app/features/Trips/widgets/trip_details.dart';
 
 class TripsPage extends StatefulWidget {
   const TripsPage({super.key});
@@ -32,6 +33,13 @@ class _TripsPageState extends State<TripsPage> {
   void dispose() {
     _pageController.dispose();
     super.dispose();
+  }
+
+  void _navigateToTripDetails() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const TripDetails()),
+    );
   }
 
   @override
@@ -152,10 +160,18 @@ class _TripsPageState extends State<TripsPage> {
         const SizedBox(height: 8),
         Row(
           children: [
-            const Expanded(
-              child: Text(
-                'Weekend with the boyzzz',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.black),
+            Expanded(
+              child: GestureDetector(
+                onTap: _navigateToTripDetails,
+                child: const Text(
+                  'Weekend with the boyzzz',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.black,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
               ),
             ),
             Container(
@@ -185,9 +201,9 @@ class _TripsPageState extends State<TripsPage> {
         const SizedBox(height: 4),
         Row(
           children: const [
-            Icon(Icons.event_available, size: 14, color: Colors.green),
+            Icon(Icons.event_available, size: 14, color: AppColors.primary),
             SizedBox(width: 4),
-            Text('Everyday', style: TextStyle(fontSize: 12, color: Colors.green)),
+            Text('Everyday', style: TextStyle(fontSize: 12, color: AppColors.primary)),
           ],
         ),
       ],
@@ -293,7 +309,7 @@ class _TripsPageState extends State<TripsPage> {
     ];
 
     return SizedBox(
-      height: 200,
+      height: 220, // Increased height to fix overflow
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: items.length,
@@ -307,32 +323,36 @@ class _TripsPageState extends State<TripsPage> {
   }
 
   Widget _buildUpcomingCard(_UpcomingTripData trip) {
-    return SizedBox(
-      width: 140,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: AspectRatio(
-              aspectRatio: 4 / 5,
-              child: Image.asset(trip.image, fit: BoxFit.cover),
+    return GestureDetector(
+      onTap: _navigateToTripDetails,
+      child: SizedBox(
+        width: 140,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: AspectRatio(
+                aspectRatio: 4 / 5,
+                child: Image.asset(trip.image, fit: BoxFit.cover),
+              ),
             ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            trip.title,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-              color: AppColors.black,
+            const SizedBox(height: 6),
+            Text(
+              trip.title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                color: AppColors.black,
+                decoration: TextDecoration.underline,
+              ),
             ),
-          ),
-          const SizedBox(height: 4),
-          Text(trip.dateRange, style: const TextStyle(fontSize: 11, color: AppColors.blue)),
-        ],
+            const SizedBox(height: 4),
+            Text(trip.dateRange, style: const TextStyle(fontSize: 11, color: AppColors.primary)),
+          ],
+        ),
       ),
     );
   }
