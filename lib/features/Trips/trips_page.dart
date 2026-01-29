@@ -4,7 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wemu_team_app/core/configs/assets/app_images.dart';
 import 'package:wemu_team_app/core/configs/assets/app_vector.dart';
 import 'package:wemu_team_app/core/configs/theme/app_colors.dart';
-import 'package:wemu_team_app/features/Trips/widgets/trip_details.dart';
+import 'package:wemu_team_app/features/Trips/widgets/create_trip.dart';
+import 'package:wemu_team_app/features/Trips/widgets/details_trip.dart';
 
 class TripsPage extends StatefulWidget {
   const TripsPage({super.key});
@@ -42,6 +43,13 @@ class _TripsPageState extends State<TripsPage> {
     );
   }
 
+  void _navigateToTripCreate() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const CreateTrip()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,25 +82,32 @@ class _TripsPageState extends State<TripsPage> {
       children: [
         const Text(
           'Trips',
-          style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700, color: AppColors.black),
-        ),
-        Container(
-          width: 32,
-          height: 32,
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.08),
-                blurRadius: 10,
-                offset: const Offset(0, 4),
-              ),
-            ],
+          style: TextStyle(
+            fontSize: 26,
+            fontWeight: FontWeight.w700,
+            color: AppColors.black,
           ),
-          child: Transform.scale(
-            scale: 0.8,
-            child: SvgPicture.asset(AppVector.add),
+        ),
+        GestureDetector(
+          onTap: _navigateToTripCreate,
+          child: Container(
+            width: 32,
+            height: 32,
+            decoration: BoxDecoration(
+              color: AppColors.white,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.08),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Transform.scale(
+              scale: 0.8,
+              child: SvgPicture.asset(AppVector.add),
+            ),
           ),
         ),
       ],
@@ -102,7 +117,11 @@ class _TripsPageState extends State<TripsPage> {
   Widget _buildSectionTitle(String title) {
     return Text(
       title,
-      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.black),
+      style: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        color: AppColors.black,
+      ),
     );
   }
 
@@ -146,7 +165,10 @@ class _TripsPageState extends State<TripsPage> {
         ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: SizedBox(
-            height: (MediaQuery.of(context).size.width - 24) * 9 / 16, // Aspect Ratio 16:9
+            height:
+                (MediaQuery.of(context).size.width - 24) *
+                9 /
+                16, // Aspect Ratio 16:9
             child: PageView.builder(
               controller: _pageController,
               itemCount: slides.length,
@@ -169,7 +191,6 @@ class _TripsPageState extends State<TripsPage> {
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                     color: AppColors.black,
-                    decoration: TextDecoration.underline,
                   ),
                 ),
               ),
@@ -203,7 +224,10 @@ class _TripsPageState extends State<TripsPage> {
           children: const [
             Icon(Icons.event_available, size: 14, color: AppColors.primary),
             SizedBox(width: 4),
-            Text('Everyday', style: TextStyle(fontSize: 12, color: AppColors.primary)),
+            Text(
+              'Everyday',
+              style: TextStyle(fontSize: 12, color: AppColors.primary),
+            ),
           ],
         ),
       ],
@@ -213,16 +237,17 @@ class _TripsPageState extends State<TripsPage> {
   Widget _buildSlide(_OngoingSlideData slide, int pageCount) {
     return Stack(
       children: [
-        Positioned.fill(
-          child: Image.asset(slide.image, fit: BoxFit.cover),
-        ),
+        Positioned.fill(child: Image.asset(slide.image, fit: BoxFit.cover)),
         Positioned.fill(
           child: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.black.withOpacity(0.05), Colors.black.withOpacity(0.7)],
+                colors: [
+                  Colors.black.withOpacity(0.05),
+                  Colors.black.withOpacity(0.7),
+                ],
               ),
             ),
           ),
@@ -255,12 +280,19 @@ class _TripsPageState extends State<TripsPage> {
               const SizedBox(height: 4),
               Row(
                 children: [
-                  const Icon(Icons.location_on, size: 14, color: Colors.white70),
+                  const Icon(
+                    Icons.location_on,
+                    size: 14,
+                    color: Colors.white70,
+                  ),
                   const SizedBox(width: 4),
                   Expanded(
                     child: Text(
                       slide.address,
-                      style: const TextStyle(fontSize: 11, color: Colors.white70),
+                      style: const TextStyle(
+                        fontSize: 11,
+                        color: Colors.white70,
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -286,7 +318,9 @@ class _TripsPageState extends State<TripsPage> {
           margin: const EdgeInsets.symmetric(horizontal: 2.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(2),
-            color: _currentPage == index ? Colors.white : Colors.white.withOpacity(0.5),
+            color: _currentPage == index
+                ? Colors.white
+                : Colors.white.withOpacity(0.5),
           ),
         );
       }),
@@ -300,7 +334,11 @@ class _TripsPageState extends State<TripsPage> {
         title: 'Weekend with the...',
         dateRange: '9 Mar - 12 Mar',
       ),
-      const _UpcomingTripData(image: AppImages.exam1, title: 'Noosa', dateRange: '9 Mar - 12 Mar'),
+      const _UpcomingTripData(
+        image: AppImages.exam1,
+        title: 'Noosa',
+        dateRange: '9 Mar - 12 Mar',
+      ),
       const _UpcomingTripData(
         image: AppImages.exam1,
         title: 'Sydney Trip',
@@ -350,7 +388,10 @@ class _TripsPageState extends State<TripsPage> {
               ),
             ),
             const SizedBox(height: 4),
-            Text(trip.dateRange, style: const TextStyle(fontSize: 11, color: AppColors.primary)),
+            Text(
+              trip.dateRange,
+              style: const TextStyle(fontSize: 11, color: AppColors.primary),
+            ),
           ],
         ),
       ),
@@ -377,5 +418,9 @@ class _UpcomingTripData {
   final String title;
   final String dateRange;
 
-  const _UpcomingTripData({required this.image, required this.title, required this.dateRange});
+  const _UpcomingTripData({
+    required this.image,
+    required this.title,
+    required this.dateRange,
+  });
 }

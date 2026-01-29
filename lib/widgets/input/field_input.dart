@@ -7,6 +7,8 @@ class FieldInput extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType keyboardType;
   final bool obscureText;
+  final bool readOnly;
+  final VoidCallback? onTap;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final ValueChanged<String>? onChanged;
@@ -20,6 +22,8 @@ class FieldInput extends StatelessWidget {
     this.controller,
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
+    this.readOnly = false,
+    this.onTap,
     this.suffixIcon,
     this.prefixIcon,
     this.onChanged,
@@ -46,23 +50,25 @@ class FieldInput extends StatelessWidget {
           controller: controller,
           keyboardType: keyboardType,
           obscureText: obscureText,
+          readOnly: readOnly,
+          onTap: onTap,
           onChanged: onChanged,
           validator: validator,
           decoration: InputDecoration(
             hintText: hintText,
             filled: true,
             fillColor: const Color(0xFFF3F3F3),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(40),
               borderSide: BorderSide.none,
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(40),
               borderSide: BorderSide(color: AppColors.lightGrey),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(40),
               borderSide: BorderSide(color: AppColors.primary, width: 1.5),
             ),
             prefixIcon: prefixIcon,

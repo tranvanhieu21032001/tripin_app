@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wemu_team_app/core/configs/assets/app_images.dart';
+import 'package:wemu_team_app/core/configs/assets/app_vector.dart';
 import 'package:wemu_team_app/core/configs/theme/app_colors.dart';
 
 class TripDetails extends StatefulWidget {
@@ -12,8 +14,9 @@ class TripDetails extends StatefulWidget {
 class _TripDetailsState extends State<TripDetails> {
   int _selectedDateIndex = 0;
 
-  static const double _cardHeight = 180;
-  static const double _timelineGap = 24;
+  static const double _cardHeight = 190;
+  static const double _timelineGap = 12;
+  static const double _timelineWidth = 50;
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +25,15 @@ class _TripDetailsState extends State<TripDetails> {
       appBar: AppBar(
         backgroundColor: AppColors.white,
         elevation: 0,
+
         leading: IconButton(
-          icon: const Icon(Icons.close, color: AppColors.black),
+          icon: Transform.scale(
+            scale: 0.9,
+            child: SvgPicture.asset(AppVector.close),
+          ),
           onPressed: () => Navigator.of(context).pop(),
         ),
+
         title: const Text(
           'Trip Details',
           style: TextStyle(
@@ -35,7 +43,20 @@ class _TripDetailsState extends State<TripDetails> {
           ),
         ),
         centerTitle: true,
+
+        actions: [
+          IconButton(
+            icon: Transform.scale(
+              scale: 0.9,
+              child: SvgPicture.asset(AppVector.more), // icon phía sau
+            ),
+            onPressed: () {
+              // action của icon
+            },
+          ),
+        ],
       ),
+
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Column(
@@ -101,10 +122,7 @@ class _TripDetailsState extends State<TripDetails> {
           address: '1 Fortitude Valley, QLD, 2006',
           image: AppImages.exam1,
         ),
-        _buildTimelineItem(
-          stopNumber: '3',
-          isLast: true,
-        ),
+        _buildTimelineItem(stopNumber: '3', isLast: true),
       ],
     );
   }
@@ -123,30 +141,33 @@ class _TripDetailsState extends State<TripDetails> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // -------- LEFT TIMELINE --------
-          Column(
-            children: [
-              _buildStopCircle(stopNumber),
+          SizedBox(
+            width: _timelineWidth,
+            child: Column(
+              children: [
+                _buildStopCircle(stopNumber),
 
-              const SizedBox(height: 6),
+                const SizedBox(height: 6),
 
-              time != null
-                  ? Text(
-                      time,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    )
-                  : const SizedBox(height: 14),
+                time != null
+                    ? Text(
+                        time,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )
+                    : const SizedBox(height: 14),
 
-              const SizedBox(height: 8),
+                const SizedBox(height: 8),
 
-              if (!isLast)
-                SizedBox(
-                  height: _cardHeight - 24,
-                  child: const _DashedLine(),
-                ),
-            ],
+                if (!isLast)
+                  SizedBox(
+                    height: _cardHeight - 24,
+                    child: const _DashedLine(),
+                  ),
+              ],
+            ),
           ),
 
           const SizedBox(width: 16),
@@ -194,7 +215,7 @@ class _TripDetailsState extends State<TripDetails> {
             borderRadius: BorderRadius.circular(12),
             child: Image.asset(
               image,
-              height: 120,
+              height: 130,
               width: double.infinity,
               fit: BoxFit.cover,
             ),
@@ -202,18 +223,12 @@ class _TripDetailsState extends State<TripDetails> {
           const SizedBox(height: 8),
           Text(
             title,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 4),
           Text(
             address,
-            style: const TextStyle(
-              color: Colors.grey,
-              fontSize: 14,
-            ),
+            style: const TextStyle(color: Colors.grey, fontSize: 14),
           ),
         ],
       ),
@@ -222,7 +237,7 @@ class _TripDetailsState extends State<TripDetails> {
 
   Widget _buildAddStopButton() {
     return SizedBox(
-      height: _cardHeight,
+      height: 130,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
@@ -231,10 +246,7 @@ class _TripDetailsState extends State<TripDetails> {
         alignment: Alignment.center,
         child: const Text(
           'add a stop',
-          style: TextStyle(
-            color: Colors.grey,
-            fontSize: 16,
-          ),
+          style: TextStyle(color: Colors.grey, fontSize: 16),
         ),
       ),
     );
@@ -252,8 +264,8 @@ class _DashedLine extends StatelessWidget {
       builder: (context, constraints) {
         const dashHeight = 5.0;
         const dashSpace = 3.0;
-        final dashCount =
-            (constraints.maxHeight / (dashHeight + dashSpace)).floor();
+        final dashCount = (constraints.maxHeight / (dashHeight + dashSpace))
+            .floor();
 
         return Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

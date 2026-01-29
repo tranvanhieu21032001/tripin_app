@@ -10,7 +10,7 @@ class BasicButton extends StatelessWidget {
   ///
   /// NOTE: `title` is kept for backward compatibility.
   final String? title;
-  final double? height;
+  final double height;
 
   /// Text color of the button label.
   /// If null, it will fallback to theme/default.
@@ -35,9 +35,9 @@ class BasicButton extends StatelessWidget {
 
   const BasicButton({
     required this.onPressed,
-    required this.height,
     this.title,
     this.child = const SizedBox.shrink(),
+    this.height = 50,
     this.textColor,
     this.backgroundColor,
     this.icon,
@@ -55,7 +55,7 @@ class BasicButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        minimumSize: Size.fromHeight(height ?? 45),
+        minimumSize: Size.fromHeight(height),
         backgroundColor: backgroundColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius ?? 40),
