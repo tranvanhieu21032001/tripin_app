@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wemu_team_app/core/configs/assets/app_images.dart';
 import 'package:wemu_team_app/core/configs/assets/app_vector.dart';
 import 'package:wemu_team_app/core/configs/theme/app_colors.dart';
+import 'package:wemu_team_app/features/Trips/widgets/check_in.dart';
 
 class TripDetails extends StatefulWidget {
   const TripDetails({super.key});
@@ -208,29 +209,38 @@ class _TripDetailsState extends State<TripDetails> {
   Widget _buildContentCard(String title, String address, String image) {
     return SizedBox(
       height: _cardHeight,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              image,
-              height: 130,
-              width: double.infinity,
-              fit: BoxFit.cover,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const CheckInPage()),
+          );
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.asset(
+                image,
+                height: 130,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            title,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            address,
-            style: const TextStyle(color: Colors.grey, fontSize: 14),
-          ),
-        ],
+            const SizedBox(height: 8),
+            Text(
+              title,
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              address,
+              style: const TextStyle(color: Colors.grey, fontSize: 14),
+            ),
+          ],
+        ),
       ),
     );
   }

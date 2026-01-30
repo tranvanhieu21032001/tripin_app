@@ -188,7 +188,7 @@ class _TripsPageState extends State<TripsPage> {
                 child: const Text(
                   'Weekend with the boyzzz',
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: AppColors.black,
                   ),
@@ -347,7 +347,7 @@ class _TripsPageState extends State<TripsPage> {
     ];
 
     return SizedBox(
-      height: 220, // Increased height to fix overflow
+      height: 240, // Increased height to fix overflow
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: items.length,
@@ -381,16 +381,15 @@ class _TripsPageState extends State<TripsPage> {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
-                fontSize: 13,
+                fontSize: 14,
                 fontWeight: FontWeight.w600,
                 color: AppColors.black,
-                decoration: TextDecoration.underline,
               ),
             ),
             const SizedBox(height: 4),
             Text(
               trip.dateRange,
-              style: const TextStyle(fontSize: 11, color: AppColors.primary),
+              style: const TextStyle(fontSize: 12, color: AppColors.primary),
             ),
           ],
         ),

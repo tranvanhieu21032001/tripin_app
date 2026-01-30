@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wemu_team_app/core/configs/assets/app_vector.dart';
 import 'package:wemu_team_app/core/configs/theme/app_colors.dart';
+import 'package:wemu_team_app/features/messages/messages_page.dart';
 import 'package:wemu_team_app/features/Trips/trips_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -15,7 +16,7 @@ class _MainPageState extends State<MainPage> {
   int _currentIndex = 1;
 
   final List<Widget> _pages = const [
-    _NavPlaceholder(title: 'Messages'),
+    MessagesPage(),
     TripsPage(),
     _NavPlaceholder(title: 'Settings'),
   ];

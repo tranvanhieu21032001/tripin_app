@@ -6,6 +6,7 @@ class UserProfile extends StatelessWidget {
   final double radius;
   final double fontSize;
   final String? backgroundUrl;
+  final String? avatarText;
   final EdgeInsetsGeometry padding;
   final bool showClose;
   final VoidCallback? onClose;
@@ -17,6 +18,7 @@ class UserProfile extends StatelessWidget {
     this.radius = 18,
     this.fontSize = 16,
     this.backgroundUrl,
+    this.avatarText,
     this.padding = const EdgeInsets.symmetric(horizontal: 16.0),
     this.showClose = false,
     this.onClose,
@@ -25,20 +27,29 @@ class UserProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ImageProvider backgroundImage;
-    if (backgroundUrl != null && backgroundUrl!.startsWith('http')) {
-      backgroundImage = NetworkImage(backgroundUrl!);
-    } else {
-      backgroundImage = const AssetImage(AppImages.avatar);
-    }
-
     final avatar = Stack(
       clipBehavior: Clip.none,
       children: [
-        CircleAvatar(
-          radius: radius,
-          backgroundImage: backgroundImage,
-        ),
+        if (avatarText != null)
+          CircleAvatar(
+            radius: radius,
+            backgroundColor: Colors.black,
+            child: Text(
+              avatarText!,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: radius * 0.6,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          )
+        else
+          CircleAvatar(
+            radius: radius,
+            backgroundImage: (backgroundUrl != null && backgroundUrl!.startsWith('http'))
+                ? NetworkImage(backgroundUrl!) as ImageProvider
+                : const AssetImage(AppImages.avatar),
+          ),
         if (showClose)
           Positioned(
             right: -2,
