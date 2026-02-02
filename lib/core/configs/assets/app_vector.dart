@@ -9,9 +9,11 @@ class AppVector {
   static const String close = '${basePath}close.svg';
   static const String more = '${basePath}more.svg';
   static const String back = '${basePath}back.svg';
+  static const String next = '${basePath}next.svg';
   static const String addMessage = '${basePath}add_message.svg';
   static const String search = '${basePath}search.svg';
   static const String user = '${basePath}user.svg';
+  static const String send = '${basePath}send.svg';
 
   static const String task = '${basePath}task.svg';
   static const String timesheet = '${basePath}timesheet.svg';

@@ -81,14 +81,14 @@ class UserProfile extends StatelessWidget {
         children: [
           avatar,
           if (name != null) ...[
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
                 name!,
-                style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.w500),
-                overflow: TextOverflow.ellipsis,
-              ),
+              style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.w500),
+              overflow: TextOverflow.ellipsis,
             ),
+          ),
           ],
         ],
       ),

@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wemu_team_app/core/configs/theme/app_colors.dart';
-
-/// A lightweight custom switch that supports:
-/// - longer track width
-/// - primary track color when ON
-/// - optional "OFF" label when OFF
 class AppSwitch extends StatelessWidget {
   const AppSwitch({
     super.key,
@@ -100,5 +95,6 @@ class AppSwitch extends StatelessWidget {
     );
   }
 }
+
 
 

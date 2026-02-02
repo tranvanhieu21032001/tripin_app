@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wemu_team_app/core/configs/theme/app_colors.dart';
 import 'package:wemu_team_app/widgets/calendar_bottom_sheet/calendar_bottom_sheet.dart';
+import 'package:wemu_team_app/widgets/message_input_bar/message_input_bar.dart';
 import 'package:wemu_team_app/widgets/user_profile/user_profile.dart';
 
 class MessageChatSheet extends StatelessWidget {
@@ -85,58 +86,7 @@ class MessageChatSheet extends StatelessWidget {
                 ),
               ),
               // Message input bar
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border(
-                    top: BorderSide(color: AppColors.lightGrey, width: 1),
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    IconButton(
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(),
-                      onPressed: () {},
-                      icon: Container(
-                        width: 32,
-                        height: 32,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: const Icon(Icons.add, color: Colors.white, size: 20),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Container(
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade100,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    IconButton(
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(),
-                      onPressed: () {},
-                      icon: Container(
-                        width: 32,
-                        height: 32,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: const Icon(Icons.send, color: Colors.white, size: 18),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              const MessageInputBar(),
             ],
           ),
         ),

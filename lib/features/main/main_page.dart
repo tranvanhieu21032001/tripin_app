@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wemu_team_app/core/configs/assets/app_vector.dart';
 import 'package:wemu_team_app/core/configs/theme/app_colors.dart';
-import 'package:wemu_team_app/features/messages/messages_page.dart';
+import 'package:wemu_team_app/features/messages/pages/list_messages_page.dart';
 import 'package:wemu_team_app/features/Trips/trips_page.dart';
+import 'package:wemu_team_app/features/settings/pages/settings_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -16,9 +17,9 @@ class _MainPageState extends State<MainPage> {
   int _currentIndex = 1;
 
   final List<Widget> _pages = const [
-    MessagesPage(),
+    ListMessagesPage(),
     TripsPage(),
-    _NavPlaceholder(title: 'Settings'),
+    SettingsPage(),
   ];
 
   Widget _navIcon({String? svgAsset, IconData? iconData, required bool isActive}) {
@@ -71,24 +72,6 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(
               icon: _navIcon(svgAsset: AppVector.setting, isActive: _currentIndex == 2), label: ""),
         ],
-      ),
-    );
-  }
-}
-
-class _NavPlaceholder extends StatelessWidget {
-  final String title;
-  const _NavPlaceholder({required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        title,
-        style: const TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.w600,
-        ),
       ),
     );
   }
