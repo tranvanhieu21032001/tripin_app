@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:wemu_team_app/core/configs/assets/app_vector.dart';
 import 'package:wemu_team_app/core/configs/theme/app_colors.dart';
+import 'package:wemu_team_app/features/settings/pages/profile_setting_page.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -54,6 +55,13 @@ class SettingsPage extends StatelessWidget {
                     icon: SvgPicture.asset(AppVector.user),
                     label: 'Edit Profile',
                     showChevron: true,
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const ProfileSettingPage(),
+                        ),
+                      );
+                    },
                   ),
                   const SizedBox(height: 16),
                   _settingRow(
@@ -93,26 +101,33 @@ Widget _settingRow({
   required String label,
   Widget? icon,
   bool showChevron = false,
+  VoidCallback? onTap,
 }) {
-  return Row(
-    children: [
-      if (icon != null) ...[
-        icon,
-        const SizedBox(width: 10),
-      ],
-      Expanded(
-        child: Text(
-          label,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: AppColors.black,
+  return InkWell(
+    onTap: onTap,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 24,
+            child: icon,
           ),
-        ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              label,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: AppColors.black,
+              ),
+            ),
+          ),
+          if (showChevron) SvgPicture.asset(AppVector.next),
+        ],
       ),
-      if (showChevron)
-       SvgPicture.asset(AppVector.next),
-    ],
+    ),
   );
 }
 
