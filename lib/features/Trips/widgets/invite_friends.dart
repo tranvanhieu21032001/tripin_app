@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wemu_team_app/core/configs/assets/app_vector.dart';
-import 'package:wemu_team_app/core/configs/theme/app_colors.dart';
 import 'package:wemu_team_app/widgets/button/basic_button.dart';
 import 'package:wemu_team_app/widgets/user_profile/user_profile.dart';
+import 'package:wemu_team_app/widgets/checkbox/circle_check.dart';
 
 class InviteFriends extends StatefulWidget {
   const InviteFriends({super.key});
@@ -109,7 +109,7 @@ class _InviteFriendsState extends State<InviteFriends> {
                   padding: EdgeInsets.zero,
                 ),
               ),
-              _selectionDot(selected: friend.selected),
+              CircleCheck(done: friend.selected),
             ],
           ),
         ),
@@ -117,18 +117,6 @@ class _InviteFriendsState extends State<InviteFriends> {
     );
   }
 
-  Widget _selectionDot({required bool selected}) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 160),
-      curve: Curves.easeOut,
-      width: 15,
-      height: 15,
-      decoration: BoxDecoration(
-        color: selected ? AppColors.primary : const Color(0xFFD9D9D9),
-        shape: BoxShape.circle,
-      ),
-    );
-  }
 }
 
 class _FriendItem {

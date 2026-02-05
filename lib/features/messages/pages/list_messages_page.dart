@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wemu_team_app/core/configs/assets/app_vector.dart';
 import 'package:wemu_team_app/core/configs/theme/app_colors.dart';
 import 'package:wemu_team_app/features/messages/widgets/message_list_item.dart';
+import 'package:wemu_team_app/features/friends/pages/friends_page.dart';
 
 class ListMessagesPage extends StatelessWidget {
   const ListMessagesPage({super.key});
@@ -18,7 +19,7 @@ class ListMessagesPage extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
-              child: _buildHeader(),
+              child: _buildHeader(context),
             ),
             Expanded(
               child: ListView.separated(
@@ -37,7 +38,7 @@ class ListMessagesPage extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
     return Row(
       children: [
         const Expanded(
@@ -62,7 +63,13 @@ class ListMessagesPage extends StatelessWidget {
           alignment: Alignment.topRight,
           children: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const FriendsPage(),
+                  ),
+                );
+              },
               icon: SvgPicture.asset(AppVector.user),
             ),
             Positioned(

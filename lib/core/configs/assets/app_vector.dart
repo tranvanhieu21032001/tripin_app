@@ -13,9 +13,11 @@ class AppVector {
   static const String addMessage = '${basePath}add_message.svg';
   static const String search = '${basePath}search.svg';
   static const String user = '${basePath}user.svg';
+  static const String addFriends = '${basePath}add_friends.svg';
+
   static const String send = '${basePath}send.svg';
   static const String update = '${basePath}update.svg';
-
+  static const String compass = '${basePath}compass.svg';
   static const String task = '${basePath}task.svg';
   static const String timesheet = '${basePath}timesheet.svg';
   static const String arrowAlt = '${basePath}arrowAlt.svg';

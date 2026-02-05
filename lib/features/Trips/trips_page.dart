@@ -69,6 +69,21 @@ class _TripsPageState extends State<TripsPage> {
               _buildSectionTitle('Upcoming'),
               const SizedBox(height: 8),
               _buildUpcomingList(),
+              const SizedBox(height: 24),
+              _buildSectionTitle(
+                'Public',
+                trailing: Container(
+                  width: 28,
+                  height: 28,
+                  child: Center(
+                    child: SvgPicture.asset(
+                      AppVector.compass,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+              _buildPublicList(),
             ],
           ),
         ),
@@ -114,14 +129,20 @@ class _TripsPageState extends State<TripsPage> {
     );
   }
 
-  Widget _buildSectionTitle(String title) {
-    return Text(
-      title,
-      style: const TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w600,
-        color: AppColors.black,
-      ),
+  Widget _buildSectionTitle(String title, {Widget? trailing}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: AppColors.black,
+          ),
+        ),
+        if (trailing != null) trailing,
+      ],
     );
   }
 
@@ -188,7 +209,7 @@ class _TripsPageState extends State<TripsPage> {
                 child: const Text(
                   'Weekend with the boyzzz',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 18,
                     fontWeight: FontWeight.w600,
                     color: AppColors.black,
                   ),
@@ -396,6 +417,109 @@ class _TripsPageState extends State<TripsPage> {
       ),
     );
   }
+}
+
+Widget _buildPublicList() {
+  final items = [
+    const _PublicTripData(
+      image: AppImages.exam,
+      title: 'Weekend with the Boyz',
+      timeRange: 'Today 5:30 PM - 12 Mar',
+      description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+    ),
+    const _PublicTripData(
+      image: AppImages.exam1,
+      title: 'Bball Pickup in Brissy',
+      timeRange: 'Today 6:30 PM',
+      description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+    ),
+  ];
+
+  return Column(
+    children: items
+        .map(
+          (trip) => Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: _PublicTripCard(trip: trip),
+          ),
+        )
+        .toList(),
+  );
+}
+
+class _PublicTripCard extends StatelessWidget {
+  const _PublicTripCard({required this.trip});
+
+  final _PublicTripData trip;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: Image.asset(
+            trip.image,
+            width: 140,
+            height: 100,
+            fit: BoxFit.cover,
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                trip.title,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.black,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                trip.timeRange,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.primary,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                trip.description,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: AppColors.grey,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _PublicTripData {
+  final String image;
+  final String title;
+  final String timeRange;
+  final String description;
+
+  const _PublicTripData({
+    required this.image,
+    required this.title,
+    required this.timeRange,
+    required this.description,
+  });
 }
 
 class _OngoingSlideData {
