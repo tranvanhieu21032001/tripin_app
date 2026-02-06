@@ -4,6 +4,7 @@ import 'package:wemu_team_app/core/configs/assets/app_images.dart';
 import 'package:wemu_team_app/core/configs/assets/app_vector.dart';
 import 'package:wemu_team_app/core/configs/theme/app_colors.dart';
 import 'package:wemu_team_app/widgets/checkbox/circle_check.dart';
+import 'package:wemu_team_app/features/profile/pages/profile_page.dart';
 
 class FriendsPage extends StatefulWidget {
   const FriendsPage({super.key});
@@ -36,10 +37,7 @@ class _FriendsPageState extends State<FriendsPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 12, 16, 4),
-              child: _buildHeader(context),
-            ),
+            Padding(padding: const EdgeInsets.fromLTRB(0, 12, 16, 4), child: _buildHeader(context)),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: _buildSortingRow(context),
@@ -73,22 +71,12 @@ class _FriendsPageState extends State<FriendsPage> {
           child: Center(
             child: Text(
               'Friends',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w700,
-                color: AppColors.black,
-              ),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: AppColors.black),
             ),
           ),
         ),
-        IconButton(
-          onPressed: () {},
-          icon: SvgPicture.asset(AppVector.search),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: SvgPicture.asset(AppVector.addFriends),
-        ),
+        IconButton(onPressed: () {}, icon: SvgPicture.asset(AppVector.search)),
+        IconButton(onPressed: () {}, icon: SvgPicture.asset(AppVector.addFriends)),
       ],
     );
   }
@@ -108,11 +96,7 @@ class _FriendsPageState extends State<FriendsPage> {
             ),
           ),
           const SizedBox(width: 4),
-          const Icon(
-            Icons.arrow_drop_down,
-            size: 24,
-            color: AppColors.primary,
-          ),
+          const Icon(Icons.arrow_drop_down, size: 24, color: AppColors.primary),
         ],
       ),
     );
@@ -175,10 +159,7 @@ class _FriendsPageState extends State<FriendsPage> {
 }
 
 class FriendListItemData {
-  const FriendListItemData({
-    required this.name,
-    required this.avatarAsset,
-  });
+  const FriendListItemData({required this.name, required this.avatarAsset});
 
   final String name;
   final String avatarAsset;
@@ -193,10 +174,7 @@ class _FriendListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(
-          radius: 28,
-          backgroundImage: AssetImage(data.avatarAsset),
-        ),
+        CircleAvatar(radius: 28, backgroundImage: AssetImage(data.avatarAsset)),
         const SizedBox(width: 12),
         Expanded(
           child: Text(
@@ -209,10 +187,10 @@ class _FriendListItem extends StatelessWidget {
           ),
         ),
         IconButton(
-          onPressed: () {},
-          icon: SvgPicture.asset(
-            AppVector.send,
-          ),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (_) => const ProfilePage()));
+          },
+          icon: SvgPicture.asset(AppVector.send),
         ),
       ],
     );
@@ -228,5 +206,3 @@ final List<FriendListItemData> _mockFriends = [
   FriendListItemData(name: 'Billy Jeans', avatarAsset: AppImages.avata6),
   FriendListItemData(name: 'Billy Jeans', avatarAsset: AppImages.avata7),
 ];
-
-
